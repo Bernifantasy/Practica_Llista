@@ -19,20 +19,24 @@
             }
             
         }
-        function eliminar()
-        {
-
-        }
-        function modificar()
-        {
-
+        function eliminar() {
+            const fruitInput = document.getElementById("fname").value;
+            const listItems = document.querySelectorAll("#list li");
+            listItems.forEach(item => {
+                if (item.textContent.toLowerCase() === fruitInput.toLowerCase()) {
+                    item.remove(); 
+                }
+            });
+            document.getElementById("fname").value = ""; 
         }
     </script>
 
 
     <form>
         <label for="fname">Fruita:</label>
-        <input type="text" id="fname" name="fname" placeholder="Ex: Pera"><br><br>
+        <input type="text" id="fname" name="fname" placeholder="Ex: Pera">
+        <input type="text" id="fmodificar" name="fmodificar" placeholder="Nom per a modificar">
+        <br><br>
         <input type="button" value="Afegir" id="Afegir" onclick="afegir()">
         <input type="button" value="Eliminar" id="Eliminar" onclick="eliminar()">
         <input type="button" value="Modificar" id="Modificar" onclick="modificar()" placeholder="Ex: Pera:Kiwi">
