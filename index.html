@@ -10,45 +10,75 @@
     <script>
         function afegir()
         {
-            const fruitInput = document.getElementById("fname").value;
-            if (fruitInput) {
-                const newFruit = document.createElement("li");
-                newFruit.textContent = fruitInput; 
-                document.getElementById("list").appendChild(newFruit); 
+            const fruita = document.getElementById("fname").value;
+            if (fruita) {
+                const nova_fruita = document.createElement("li");
+                nova_fruita.textContent = fruita; 
+                document.getElementById("list").appendChild(nova_fruita); 
                 document.getElementById("fname").value = ""; 
             }
             
         }
         function eliminar() {
-            const fruitInput = document.getElementById("fname").value;
-            const listItems = document.querySelectorAll("#list li");
-            listItems.forEach(item => {
-                if (item.textContent.toLowerCase() === fruitInput.toLowerCase()) {
+            const fruita = document.getElementById("fname").value;
+            const llistar_fruita = document.querySelectorAll("#list li");
+            llistar_fruita.forEach(item => {
+                if (item.textContent.toLowerCase() === fruita.toLowerCase()) {
                     item.remove(); 
                 }
             });
             document.getElementById("fname").value = ""; 
         }
+
+        function modificar() {
+            const fruita_vella = document.getElementById("fname").value; // Fruta a buscar
+            const nova_fruita = document.getElementById("fmodificar").value; // Nueva fruta
+            const llistar_fruita = document.querySelectorAll("#list li"); // Seleccionar todos los elementos <li>
+            
+            // Verificar si la fruta a modificar y la nueva fruta no están vacías
+            if (fruita_vella.trim() === "" || nova_fruita.trim() === "") {
+                alert("Por favor, introduce el nombre de la fruta a modificar y el nuevo nombre.");
+                return; // Salir de la función si alguno de los nombres es vacío
+            }
+
+            let found = false; // Variable para verificar si se encontró la fruta a modificar
+
+            llistar_fruita.forEach(item => {
+                if (item.dataset.fruit.toLowerCase() === fruita_vella.trim().toLowerCase()) { // Comparar frutas
+                    item.dataset.fruit = nova_fruita.trim(); // Cambiar el valor en data-attribute
+                    item.textContent = nova_fruita.trim(); // Cambiar el texto visible
+                    found = true; // Marcar que se encontró la fruta
+                }
+            });
+
+            if (!found) {
+                alert("La fruta no se encuentra en la lista."); // Mensaje si la fruta no se encuentra
+            }
+
+            // Limpiar los campos de entrada
+            document.getElementById("fname").value = "";
+            document.getElementById("fmodificar").value = "";
+        }
     </script>
 
+<form>
+    <label for="fname">Fruita a Afegir, Eliminar o Modificar:</label>
+    <input type="text" id="fname" name="fname" placeholder="Ex: Pera">
+    <br><br>
+    <label for="fmodificar">Nou Nom:</label>
+    <input type="text" id="fmodificar" name="fmodificar" placeholder="Ex: Kiwi">
+    <br><br>
+    <input type="button" value="Afegir" id="Afegir" onclick="afegir()">
+    <input type="button" value="Eliminar" id="Eliminar" onclick="eliminar()">
+    <input type="button" value="Modificar" id="Modificar" onclick="modificar()">
+</form>
 
-    <form>
-        <label for="fname">Fruita:</label>
-        <input type="text" id="fname" name="fname" placeholder="Ex: Pera">
-        <input type="text" id="fmodificar" name="fmodificar" placeholder="Nom per a modificar">
-        <br><br>
-        <input type="button" value="Afegir" id="Afegir" onclick="afegir()">
-        <input type="button" value="Eliminar" id="Eliminar" onclick="eliminar()">
-        <input type="button" value="Modificar" id="Modificar" onclick="modificar()" placeholder="Ex: Pera:Kiwi">
-    </form>
-
-
-    <ul id="list">
-        <li>Pera</li>
-        <li>Poma</li>
-        <li>Pinya</li>
-        <li>Paraguayo</li>
-    </ul>
+<ul id="list">
+    <li data-fruit="Pera">Pera</li>
+    <li data-fruit="Poma">Poma</li>
+    <li data-fruit="Pinya">Pinya</li>
+    <li data-fruit="Paraguayo">Paraguayo</li>
+</ul>
 
 
 
