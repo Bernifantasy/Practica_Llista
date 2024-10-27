@@ -31,33 +31,16 @@
         }
 
         function modificar() {
-            const fruita_vella = document.getElementById("fname").value; // Fruta a buscar
-            const nova_fruita = document.getElementById("fmodificar").value; // Nueva fruta
-            const llistar_fruita = document.querySelectorAll("#list li"); // Seleccionar todos los elementos <li>
-            
-            // Verificar si la fruta a modificar y la nueva fruta no están vacías
-            if (fruita_vella.trim() === "" || nova_fruita.trim() === "") {
-                alert("Por favor, introduce el nombre de la fruta a modificar y el nuevo nombre.");
-                return; // Salir de la función si alguno de los nombres es vacío
+            let posicio = document.getElementById("posicio").value;
+            let text = document.getElementById("nouText").value;
+            let llista = document.getElementById("llista");
+
+            if (llista.children[posicio]){
+                llista.children[posicio].innerHTML= text;
+            } else{
+                console.log("No existeix la posicio");
             }
 
-            let found = false; // Variable para verificar si se encontró la fruta a modificar
-
-            llistar_fruita.forEach(item => {
-                if (item.dataset.fruit.toLowerCase() === fruita_vella.trim().toLowerCase()) { // Comparar frutas
-                    item.dataset.fruit = nova_fruita.trim(); // Cambiar el valor en data-attribute
-                    item.textContent = nova_fruita.trim(); // Cambiar el texto visible
-                    found = true; // Marcar que se encontró la fruta
-                }
-            });
-
-            if (!found) {
-                alert("La fruta no se encuentra en la lista."); // Mensaje si la fruta no se encuentra
-            }
-
-            // Limpiar los campos de entrada
-            document.getElementById("fname").value = "";
-            document.getElementById("fmodificar").value = "";
         }
     </script>
 
@@ -70,7 +53,12 @@
     <br><br>
     <input type="button" value="Afegir" id="Afegir" onclick="afegir()">
     <input type="button" value="Eliminar" id="Eliminar" onclick="eliminar()">
-    <input type="button" value="Modificar" id="Modificar" onclick="modificar()">
+    <label for="text">Modificar</label>
+    <input type="number" id="posicio" placeholder="Fica la posicio que vols modificar"><br><br>
+
+    <label for="text">Text a canviar</label>
+    <input type="text" id="nouText" placeholder="Fica el text per al qual vols canviar">
+    <button type="button" onclick="functiomodificar()">Modificar</button>
 </form>
 
 <ul id="list">
