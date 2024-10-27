@@ -8,62 +8,61 @@
 <body>
 
     <script>
-        function afegir()
-        {
+        function afegir() {
             const fruita = document.getElementById("fname").value;
             if (fruita) {
                 const nova_fruita = document.createElement("li");
-                nova_fruita.textContent = fruita; 
-                document.getElementById("list").appendChild(nova_fruita); 
-                document.getElementById("fname").value = ""; 
+                nova_fruita.textContent = fruita;
+                document.getElementById("list").appendChild(nova_fruita);
+                document.getElementById("fname").value = "";
             }
-            
         }
+
         function eliminar() {
             const fruita = document.getElementById("fname").value;
             const llistar_fruita = document.querySelectorAll("#list li");
             llistar_fruita.forEach(item => {
                 if (item.textContent.toLowerCase() === fruita.toLowerCase()) {
-                    item.remove(); 
+                    item.remove();
                 }
             });
-            document.getElementById("fname").value = ""; 
+            document.getElementById("fname").value = "";
         }
 
         function modificar() {
             let posicio = document.getElementById("posicio").value;
             let text = document.getElementById("nouText").value;
-            let llista = document.getElementById("llista");
+            let llista = document.getElementById("list");
 
-            if (llista.children[posicio]){
-                llista.children[posicio].innerHTML= text;
-            } else{
+            if (llista.children[posicio]) {
+                llista.children[posicio].innerHTML = text;
+            } else {
                 console.log("No existeix la posicio");
             }
-
         }
     </script>
 
-<form>
-    <label for="fname">Fruita a Afegir, Eliminar o Modificar:</label>
-    <input type="text" id="fname" name="fname" placeholder="Ex: Pera">
-    <br><br>
-    <input type="button" value="Afegir" id="Afegir" onclick="afegir()">
-    <input type="button" value="Eliminar" id="Eliminar" onclick="eliminar()">
-    <label for="text">Modificar</label>
-    <input type="number" id="posicio" placeholder="Fica la posicio que vols modificar"><br><br>
-
-    <label for="text">Text a canviar</label>
-    <input type="text" id="nouText" placeholder="Fica el text per al qual vols canviar">
-    <button type="button" onclick="functiomodificar()">Modificar</button>
-</form>
+    <form>
+        <label for="fname">Fruita a Afegir o Eliminar:</label>
+        <input type="text" id="fname" name="fname" placeholder="Ex: Pera">
+        <input type="button" value="Afegir" id="Afegir" onclick="afegir()">
+        <input type="button" value="Eliminar" id="Eliminar" onclick="eliminar()">
+        <br><br>
+        <label for="text">Modificar</label>
+        <input type="number" id="posicio" placeholder="Fica la posicio que vols modificar">
+        <label for="text">Text a canviar</label>
+        <input type="text" id="nouText" placeholder="Fica el text per al qual vols canviar">
+        <button type="button" onclick="modificar()">Modificar</button>
+    </form>
 
 <ul id="list">
-    <li data-fruit="Pera">Pera</li>
-    <li data-fruit="Poma">Poma</li>
-    <li data-fruit="Pinya">Pinya</li>
-    <li data-fruit="Paraguayo">Paraguayo</li>
+    <li>Poma</li>
+    <li>Plàtan</li>
+    <li>Cirera</li>
+    <li>Raïm</li>
+    <li>Meló</li>
 </ul>
+
 
 
 
